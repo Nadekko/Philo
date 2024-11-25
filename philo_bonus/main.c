@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:09:11 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/16 17:52:23 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:47:47 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	start_simulation(t_philo *philo, t_prog *prog)
 			printf("Error : fork failed\n");
 			while (i--)
 				kill(philo[i].pid, SIGKILL);
-			printf("Error : fork failed\n");
 			return ;
 		}
 		else if (philo[i].pid == 0)
@@ -34,6 +33,8 @@ void	start_simulation(t_philo *philo, t_prog *prog)
 		}
 		i++;
 	}
+	// if (sem_wait(prog->death))
+	// 	terminate_process(prog);
 	while (i--)
 		waitpid(philo[i].pid, NULL, 0);
 }
@@ -52,8 +53,8 @@ static int	ft_parse_args(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	t_prog prog;
-	t_philo *philo;
+	t_prog	prog;
+	t_philo	*philo;
 
 	if (ft_parse_args(ac, av) || ft_init_prog(&prog, ac, av))
 		return (1);
@@ -65,6 +66,8 @@ int	main(int ac, char **av)
 	}
 	ft_init_philo(philo, &prog);
 	prog.philo = philo;
+	prog.start = get_time_ms();
+	philo->last_meal = prog.start;
 	start_simulation(philo, &prog);
 	// ft_free(&prog, philo);
 	return (0);

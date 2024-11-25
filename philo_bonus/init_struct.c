@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:23:12 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/16 17:36:01 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:35:29 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,12 @@ int	ft_init_sem(t_prog *prog)
 {
 	sem_unlink("forks");
 	sem_unlink("print");
-	sem_unlink("data");
 	sem_unlink("death");
 	prog->forks = sem_open("forks", O_CREAT, 0644, prog->nb_of_philo);
 	if (prog->forks == SEM_FAILED)
 		return (printf("Error : %s\n", strerror(errno)), 1);
 	prog->print = sem_open("print", O_CREAT, 0644, 1);
 	if (prog->print == SEM_FAILED)
-		return (printf("Error : %s\n", strerror(errno)), 1);
-	prog->data = sem_open("data", O_CREAT, 0644, 1);
-	if (prog->data == SEM_FAILED)
 		return (printf("Error : %s\n", strerror(errno)), 1);
 	prog->death = sem_open("death", O_CREAT, 0644, 1);
 	if (prog->death == SEM_FAILED)

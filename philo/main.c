@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:43:05 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/12 15:03:20 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:48:24 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	start_simulation(t_philo *philo, t_prog *prog, pthread_t *supervisor)
 	int	i;
 
 	i = 0;
-	prog->start = get_time_ms();
 	while (i < prog->nb_of_philo)
 	{
 		if (pthread_create(&philo[i].tid, NULL, ft_routine, &philo[i]))
@@ -92,6 +91,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	prog.philo = philo;
+	prog.start = get_time_ms();
+	philo->last_meal = prog.start;
 	start_simulation(philo, &prog, &supervisor);
 	ft_free(&prog);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:19:30 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/16 17:40:45 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:47:32 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ typedef struct s_prog
 	int				death_flag;
 	sem_t			*forks;
 	sem_t			*print;
-	sem_t			*data;
 	sem_t			*death;
 	t_philo			*philo;
 }					t_prog;
+
 
 /*		PARSING		*/
 long				ft_atol(char *str);
@@ -81,7 +81,9 @@ void				*ft_supervisor(void *arg);
 
 void				ft_free(t_prog *prog, t_philo *philo);
 
+void				terminate_process(t_prog *prog);
 int					ft_check_death(t_philo *philo);
+void				ft_clean_sem(t_prog *prog);
 // long				get_long_value(long *value, sem_t *sem);
 // void				set_long_value(long *value, long new_value, sem_t *sem);
 #endif
