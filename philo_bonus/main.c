@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:09:11 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/25 23:47:47 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:29:03 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	start_simulation(t_philo *philo, t_prog *prog)
 	i = 0;
 	while (i < prog->nb_of_philo)
 	{
-		if ((philo[i].pid = fork()) == -1)
+		philo[i].pid = fork();
+		if (philo[i].pid == -1)
 		{
 			printf("Error : fork failed\n");
 			while (i--)
@@ -29,14 +30,19 @@ void	start_simulation(t_philo *philo, t_prog *prog)
 		else if (philo[i].pid == 0)
 		{
 			ft_routine(&philo[i]);
-			exit(0);
+			// exit(0);
 		}
 		i++;
 	}
 	// if (sem_wait(prog->death))
 	// 	terminate_process(prog);
-	while (i--)
+	i = 0;
+	while (i < prog->nb_of_philo)
+	{
+		printf("here\n");
 		waitpid(philo[i].pid, NULL, 0);
+		i++;
+	}
 }
 
 static int	ft_parse_args(int ac, char **av)
