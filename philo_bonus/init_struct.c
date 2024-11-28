@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:23:12 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/25 23:35:29 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:33:04 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	ft_init_philo(t_philo *philo, t_prog *prog)
 		philo[i].nb_eaten = -1;
 		if (prog->nb_time_to_eat != -1)
 			philo[i].nb_eaten = 0;
+		philo[i].death = 0;
 		i++;
 	}
 	return (0);

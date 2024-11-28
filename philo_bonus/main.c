@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:09:11 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/26 16:29:03 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/28 19:08:07 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	start_simulation(t_philo *philo, t_prog *prog)
 {
 	int	i;
+	int	status;
 
 	i = 0;
+	status = 0;
 	while (i < prog->nb_of_philo)
 	{
 		philo[i].pid = fork();
@@ -28,19 +30,22 @@ void	start_simulation(t_philo *philo, t_prog *prog)
 			return ;
 		}
 		else if (philo[i].pid == 0)
-		{
 			ft_routine(&philo[i]);
-			// exit(0);
-		}
 		i++;
+		usleep(2000);
 	}
-	// if (sem_wait(prog->death))
-	// 	terminate_process(prog);
 	i = 0;
 	while (i < prog->nb_of_philo)
 	{
-		printf("here\n");
-		waitpid(philo[i].pid, NULL, 0);
+		waitpid(philo[i].pid, &status, 0);
+			// perror("waitpid failed");
+		// else
+			// printf("Philosophe %d terminé (pid = %d, status = %d)\n", philo[i].id, philo[i].pid, status);
+		if (WIFEXITED(status) == 1 && WEXITSTATUS(status) == 0)
+		{
+			// printf("Philosophe %d a terminé avec le code %d\n", philo[i].id, WEXITSTATUS(status));
+			terminate_process(prog);
+		}
 		i++;
 	}
 }
@@ -75,6 +80,7 @@ int	main(int ac, char **av)
 	prog.start = get_time_ms();
 	philo->last_meal = prog.start;
 	start_simulation(philo, &prog);
+	ft_clean_sem(&prog);
 	// ft_free(&prog, philo);
 	return (0);
 }

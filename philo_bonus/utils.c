@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:33:50 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/25 23:32:16 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:00:37 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	ft_usleep(int time, t_philo *philo)
 	start = get_time_ms();
 	while (get_time_ms() - start < time)
 	{
-		if (ft_check_death(philo))
-			return ;
+		if (ft_check_death(philo) == 1)
+			break ;
 		usleep(100);
 	}
 }
