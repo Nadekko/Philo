@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:44:45 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/12 11:21:15 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:19:13 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_check_has_eaten(t_philo *philo)
 {
 	if (philo->prog->nb_time_to_eat != -1)
 	{
-		if (philo->prog->has_eaten == philo->prog->nb_time_to_eat)
+		if (get_value(&philo->prog->has_eaten, &philo->prog->data) == philo->prog->nb_time_to_eat)
 			return (1);
 	}
 	return (0);
@@ -44,7 +44,7 @@ void	ft_print_msg(t_philo *philo, char *msg)
 	int	time;
 
 	time = get_time_ms() - philo->prog->start;
-	if (ft_check_death(philo) == 1)
+	if (ft_check_death(philo) == 1 || ft_check_has_eaten(philo) == 1)
 		return ;
 	pthread_mutex_lock(&philo->prog->print);
 	if (!ft_strcmp(msg, "is eating"))

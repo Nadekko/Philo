@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:39:24 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/12 11:21:06 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:13:45 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ft_set_nb_eaten(t_prog *prog)
 			eaten++;
 			if (eaten == prog->nb_of_philo)
 			{
-				prog->has_eaten = prog->philo[i].nb_eaten;
+				prog->has_eaten = prog->nb_time_to_eat;
 				return (1);
 			}
 		}

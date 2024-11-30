@@ -6,7 +6,7 @@
 /*   By: andjenna <andjenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 11:19:30 by andjenna          #+#    #+#             */
-/*   Updated: 2024/11/28 18:33:11 by andjenna         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:20:52 by andjenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,17 @@ int ft_init_philo(t_philo *philo, t_prog *prog);
 int get_time_ms(void);
 void ft_usleep(int time, t_philo *philo);
 void ft_print_msg(t_philo *philo, char *msg);
-int get_value(int *value, sem_t *sem);
-void set_value(int *value, int new_value, sem_t *sem);
 
 /*		PHILO		*/
 void ft_routine(t_philo *philo);
 
-/*		SUPERVISOR		*/
-void *ft_supervisor(void *arg);
 
 void ft_free(t_prog *prog, t_philo *philo);
 
 void terminate_process(t_prog *prog);
 int ft_check_death(t_philo *philo);
 void ft_clean_sem(t_prog *prog);
+int ft_check_nb_eaten(t_philo *philo);
 // long				get_long_value(long *value, sem_t *sem);
 // void				set_long_value(long *value, long new_value, sem_t *sem);
 #endif

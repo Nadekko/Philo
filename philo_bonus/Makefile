@@ -1,16 +1,14 @@
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -g3 -pthread 
-# -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -g3 
+# -fsanitize=memory
 NAME = philo_bonus
 
 SRC = main.c \
 	init_struct.c \
 	parsing.c \
 	philo.c \
-	supervisor.c \
 	utils.c \
-	utils2.c \
 	ft_free.c \
 
 OBJ = $(SRC:.c=.o)
